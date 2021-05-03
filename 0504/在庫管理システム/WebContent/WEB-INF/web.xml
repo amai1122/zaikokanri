@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    id="WebApp_ID"
+    version="2.5">
+  <display-name>在庫管理システム</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+  <servlet>
+    <servlet-name>ItemInitialize</servlet-name>
+    <servlet-class>items.ItemInitialize</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ItemInitialize</servlet-name>
+    <url-pattern>/servlet/items.ItemInitialize</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>NewItems</servlet-name>
+    <servlet-class>items.NewItems</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>NewItems</servlet-name>
+    <url-pattern>/servlet/items.NewItems</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UpdateItems</servlet-name>
+    <servlet-class>items.UpdateItems</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UpdateItems</servlet-name>
+    <url-pattern>/servlet/items.UpdateItems</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteItems</servlet-name>
+    <servlet-class>items.DeleteItems</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DeleteItems</servlet-name>
+    <url-pattern>/servlet/items.DeleteItems</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Insert_Items</servlet-name>
+    <servlet-class>items.Insert_Items</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Insert_Items</servlet-name>
+    <url-pattern>/servlet/items.Insert_Items</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ItemSearch</servlet-name>
+    <servlet-class>items.ItemSearch</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ItemSearch</servlet-name>
+    <url-pattern>/servlet/items.ItemSearch</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StockInitialize</servlet-name>
+    <servlet-class>stock.StockInitialize</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>StockInitialize</servlet-name>
+    <url-pattern>/servlet/stock.StockInitialize</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StockMoveInsert</servlet-name>
+    <servlet-class>stock.StockMoveInsert</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>StockMoveInsert</servlet-name>
+    <url-pattern>/servlet/stock.StockMoveInsert</url-pattern>
+  </servlet-mapping>
+
+
+</web-app>

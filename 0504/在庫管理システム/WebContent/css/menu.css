@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+h1.menu{
+	font-size:32pt;
+	text-align:center;
+
+}
+div.items{
+	font-size:20pt;
+	text-align:center;
+}
+div.stock_move{
+	font-size:20pt;
+	text-align:center;
+}
