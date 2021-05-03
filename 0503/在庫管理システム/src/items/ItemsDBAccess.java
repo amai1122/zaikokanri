@@ -27,13 +27,13 @@ public class ItemsDBAccess {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
 
-			System.out.println("DB接続されました");
+			System.out.println("DB接続されましたSelect");
 
 			//SQL文字列(all= update= )
 			if ("all".equals(dbCom)) {
 				//商品マスタの表示なら全部持ってくる
 				sqlStr = "SELECT * FROM items;";
-				System.out.println("allが選択されました");
+				//System.out.println("allが選択されました");
 			} else if ("update".equals(dbCom)) {
 				//編集画面なら指定IDのデータだけ持ってくる
 				sqlStr = "SELECT * From items WHERE item_id ='"+ item_id +"';";
@@ -41,7 +41,7 @@ public class ItemsDBAccess {
 			} else if ("search".equals(dbCom)) {
 				//商品名で検索(item_idに商品名が入る)
 				sqlStr = "SELECT * From items WHERE item_name LIKE '%"+ item_id +"%';";
-				System.out.println("searchが選択されました");
+				//System.out.println("searchが選択されました");
 			}
 			// プリペアドステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
@@ -57,7 +57,7 @@ public class ItemsDBAccess {
 
 			// SQL文実行
 			rs = pstmt.executeQuery();
-			System.out.println("セレクトが実行されました");
+			//System.out.println("セレクトが実行されました");
 
 			//戻り値のlistにセット
 			while (rs.next()) {
@@ -70,7 +70,7 @@ public class ItemsDBAccess {
 
 				itemList.add(bn);
 			}
-			System.out.println("リストにセットされました");
+			//System.out.println("リストにセットされました");
 
 
 		}catch (ClassNotFoundException e) {
@@ -114,7 +114,7 @@ public class ItemsDBAccess {
 			Class.forName("org.mariadb.jdbc.Driver");
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
-			System.out.println("DB接続されました");
+			System.out.println("DB接続されましたInsert");
 
 			//IDがDBにあるかを検索
 			//プリペアードステートメント生成
@@ -205,18 +205,20 @@ public class ItemsDBAccess {
 			Class.forName("org.mariadb.jdbc.Driver");
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
+			System.out.println("DB接続されましたDelete");
 
 			//削除
-			sqlStr = "DELETE FROM item_id WHERE itemid = ?";
+			sqlStr = "DELETE FROM items WHERE item_id ='"+ item_id + "';";
 
 			//プリペアードステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
 
-			int index = 1;
-			pstmt.setString(index, item_id);
+			//int index = 1;
+			//pstmt.setString(index, item_id);
 
 			//SQL実行
 			pstmt.executeUpdate();
+			System.out.println("削除されました");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

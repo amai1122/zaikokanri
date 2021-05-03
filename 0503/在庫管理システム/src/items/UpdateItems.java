@@ -18,13 +18,12 @@ public class UpdateItems extends HttpServlet {
 			throws ServletException, IOException {
 
 		//行先指定
-		final String NEXTPAGE_PATH = "/JSP/itemsInsert.jsp";
+		final String NEXTPAGE_PATH = "/jsp/items/itemsInsert.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 
 		// DBの引数を取得
-		String item_id = request.getParameter("	item_id");//dbから取得
-		System.out.println("ID取得");
+		String item_id = request.getParameter("item_id");
 
 		final String dbcom ="update";//
 

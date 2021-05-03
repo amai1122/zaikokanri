@@ -15,7 +15,7 @@ public class DeleteItems extends HttpServlet {
 			throws ServletException, IOException {
 
 		//削除は元の画面に戻る
-		final String NEXTPAGE_PATH = "/jsp/ItemInitialize.java";
+		final String NEXTPAGE_PATH = "../servlet/items.ItemInitialize";
 
 
 		request.setCharacterEncoding("UTF-8");
