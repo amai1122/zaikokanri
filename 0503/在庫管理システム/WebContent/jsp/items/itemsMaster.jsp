@@ -29,11 +29,6 @@
 
 	<% List<ItemsBean> itemList = (List<ItemsBean>) request.getAttribute("itemList"); %>
 
-	<form action="../servlet/items.UpdateItems" name ="form0" method="post">
-		<input type="hidden" value= "00001" name=item_id >
-		<a href="javascript:form0.submit()" >00001</a>
-	</form>
-
 	<!-- 表示のためにテーブル内容を取得 -->
 	<table border="1">
 		<tr>
@@ -52,12 +47,10 @@
 			for (ItemsBean item : itemList) {
 		%>
 			<tr>
-
 				<td><%=itemNo%></td>
 				<td>
-					<form action="../servlet/items.UpdateItems" name ="form"<%=itemNo%> method="post">
+					<form action="../servlet/items.UpdateItems" name ="form<%=itemNo%>" method="post">
 						<input type="hidden" value= <%=item.getItem_id()%> name=item_id >
-						<input type="submit" value=<%=item.getItem_id()%> />
 						<a href="javascript:form<%=itemNo%>.submit()" ><%=item.getItem_id()%></a>
 					</form>
 				</td>

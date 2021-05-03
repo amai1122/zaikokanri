@@ -76,5 +76,25 @@
     <url-pattern>/servlet/items.ItemSearch</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>StockInitialize</servlet-name>
+    <servlet-class>stock.StockInitialize</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>StockInitialize</servlet-name>
+    <url-pattern>/servlet/stock.StockInitialize</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StockMoveInsert</servlet-name>
+    <servlet-class>stock.StockMoveInsert</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>StockMoveInsert</servlet-name>
+    <url-pattern>/servlet/stock.StockMoveInsert</url-pattern>
+  </servlet-mapping>
+
 
 </web-app>

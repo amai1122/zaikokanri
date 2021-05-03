@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<link rel="stylesheet" href="/在庫管理システム/css/iteminsert.css" type="text/css">
+
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="/在庫管理システム/css/iteminsert.css" type="text/css">
 <title>商品登録</title>
 </head>
 <body>

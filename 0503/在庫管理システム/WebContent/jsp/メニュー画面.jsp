@@ -22,8 +22,10 @@
 </div>
 <br>
 <div class="stock_move">
-	<img src="/在庫管理システム/gif/stock.gif">
-	<a  href="/在庫管理システム/jsp/stock/リンク先">在庫入出庫</a>
+	<form action="../servlet/stock.StockInitialize" name ="stockform" method="post">
+		<img src="/在庫管理システム/gif/stock.gif">
+		<a  href="javascript:stockform.submit()">在庫入出庫</a>
+	</form>
 </div>
 
 </body>
