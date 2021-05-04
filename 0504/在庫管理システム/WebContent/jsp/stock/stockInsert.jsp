@@ -26,8 +26,8 @@
 	<form action="../servlet/stock.InsertHistory" name="insertfome" method="post">
 	<table>
 		<tr>
-			<td>入出庫ＩＤ/td>
-			<td><input type="text" name="item_id" value=<%=request.getAttribute("item_id") %> ></td>
+			<td>入出庫ＩＤ</td>
+			<td><input type="text" name="move_id" value=<%=request.getAttribute("move_id") %> ></td>
 		</tr>
 		<tr>
 			<td>理由</td>
@@ -45,29 +45,34 @@
 		</tr>
 		<tr>
 			<td>商品ＩＤ</td>
-			<td><%=request.getAttribute("item_id") %></td>
+			<td><%=request.getAttribute("item_id") %>
+			<input type="hidden" value= <%=request.getAttribute("item_id") %> name=item_id ></td>
 		</tr>
 		<tr>
 			<td>商品名</td>
-			<td><%=request.getAttribute("item_name") %></td>
+			<td><%=request.getAttribute("item_name") %>
+			<input type="hidden" value= <%=request.getAttribute("item_name") %> name=item_name ></td>
+
 		</tr>
 		<tr>
 			<td>販売単価</td>
-			<td><%=request.getAttribute("item_price") %></td>
+			<td><%=request.getAttribute("item_price") %>
+			<input type="hidden" value= <%=request.getAttribute("item_price") %> name=item_price ></td>
 		</tr>
 		<tr>
 			<td>商品原価</td>
-			<td><%=request.getAttribute("cost_price") %></td>
+			<td><%=request.getAttribute("cost_price") %>
+			<input type="hidden" value= <%=request.getAttribute("cost_price") %> name=cost_price ></td>
 		</tr>
 		<tr>
 			<td>在庫数</td>
-			<td> <%=request.getAttribute("stock_qty") %> </td>
+			<td> <%=request.getAttribute("stock_qty") %>
+			<input type="hidden" value= <%=request.getAttribute("stock_qty") %> name=stock_qty ></td>
 		</tr>
 		<tr>
 			<td>入庫/出庫</td>
 			<td><label>
-				<input type="radio" name="in_or_out" value="+"
-					<% if("+".equals(request.getAttribute("in_or_out"))){ %>checked="checked" <%}%> >＋：入庫
+				<input type="radio" name="in_or_out" value="+" checked="checked" >＋：入庫
 				<input type="radio" name="in_or_out" value="－"
 				 	<% if("-".equals(request.getAttribute("in_or_out"))){ %>checked="checked" <%}%> >－：出庫
 				</label>
@@ -75,14 +80,17 @@
 		</tr>
 		<tr>
 			<td>入出庫数</td>
-			<td> <input type="text" name="item_price" value=<%=request.getAttribute("move_qty") %> >
+			<td> <input type="text" name="move_qty" value=<%=request.getAttribute("move_qty") %> >
 		</tr>
 
 	</table>
+	<% if( "".equals(request.getAttribute("move_id"))){
+	%>
+		<input type="submit" value="保存" />
+	<% } %>
 
-	<input type="submit" value="保存" />
 	</form>
-	<form action="../servlet/stock.stockInitialize" name ="itemform" method="post">
+	<form action="../servlet/stock.StockInitialize" name ="itemform" method="post">
 		<input type="submit" value="戻る" />
 	</form>
 

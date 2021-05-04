@@ -18,9 +18,9 @@ public class StockMoveInsert extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// DBの引数を取得
-		String move_id = request.getParameter("move_id");
+		String move_id = request.getParameter("Move_id");
 
-		final String dbcom ="update";//
+		final String dbcom ="update";
 
 		//該当IDの商品情報をDBから取得
 		try {

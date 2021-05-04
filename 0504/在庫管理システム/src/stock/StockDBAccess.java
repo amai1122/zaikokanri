@@ -27,7 +27,7 @@ public class StockDBAccess {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
 
-			System.out.println("DB接続されましたSelect");
+
 
 			//SQL文字列(all= update= )
 			if ("all".equals(dbCom)) {
@@ -39,7 +39,7 @@ public class StockDBAccess {
 				sqlStr = "SELECT * From stock_move WHERE move_id ='"+ move_id +"';";
 				System.out.println("updateが選択されました");
 			} else if ("search".equals(dbCom)) {
-				//商品名で検索(item_idに商品名が入る)
+				//商品名で検索(move_idに商品名item_idが入る)
 				sqlStr = "SELECT * From stock_move WHERE item_name LIKE '%"+ move_id +"%';";
 				//System.out.println("searchが選択されました");
 			}
@@ -127,26 +127,28 @@ public class StockDBAccess {
 			//psID.setString(1, move_id);
 			// SQL文実行
 			rsID = psID.executeQuery();
-			System.out.println("セレクトしました");
+			//System.out.println("セレクトしました");
 
 			String str="";
 			while(rsID.next()){
-				str=rsID.getString("item_id");
+				str=rsID.getString("move_id");
 			}
 			if (move_id.equals(str)) {
 				//IDがあれば更新
-				sqlStr = "UPDATE stock_move SET move_id='"+ move_id +"',reason_id='"+ reason_id +"',move_date='"
-						+ move_date +"',item_id='" + item_id + "',item_name='" + item_name + "',item_price ="
-						+ item_price + ",cost_price= " + cost_price + ",stock_qty="+ stock_qty +" in_or_out='"
-						+ in_or_out +"',move_qty="+ move_qty +" WHERE item_id = '" + move_id + "';";
-				System.out.println("更新が選ばれました");
+				//sqlStr = "UPDATE stock_move SET move_id='"+ move_id +"',reason_id='"+ reason_id +"',move_date='"
+				//		+ move_date +"',item_id='" + item_id + "',item_name='" + item_name + "',item_price ="
+				//		+ item_price + ",cost_price= " + cost_price + ",stock_qty="+ stock_qty +", in_or_out='"
+				//		+ in_or_out +"',move_qty="+ move_qty +" WHERE move_id = '" + move_id + "';";
+				//System.out.println("更新が選ばれました");
+
+
 			} else {
 				//IDが無ければ新規登録
-				sqlStr = "INSERT INTO items(move_id,reason_id,move_date,item_id,item_name,item_price,"
+				sqlStr = "INSERT INTO stock_move(move_id,reason_id,move_date,item_id,item_name,item_price,"
 						+"cost_price,stock_qty,in_or_out,move_qty)VALUES('"+ move_id +"','"+ reason_id +"','"+ move_date
 						+"','" + item_id + "','"+ item_name + "'," + item_price + "," + cost_price + ","+ stock_qty
 						+",'"+ in_or_out +"',"+ move_qty +");";
-				System.out.println("新規登録が選ばれました");
+				//System.out.println("新規登録が選ばれました");
 			}
 
 			//プリペアードステートメント生成
@@ -169,6 +171,10 @@ public class StockDBAccess {
 			//SQL実行
 			pstmt.executeUpdate();
 			System.out.println("保存されました");
+
+			//在庫数を商品マスタに保存
+
+
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -196,6 +202,61 @@ public class StockDBAccess {
 
 		}
 	}
+	//------------------------------------------------
+	public String insertCheckDBAccess(String move_id) {
+		//データベースへの新規登録または編集
 
+		//データベースの検索
+		Connection con = null;
+		PreparedStatement psID = null;
+		ResultSet rsID = null;
+		String sqlStr = null;
+		String check = "OK";
 
+		try {
+			//ドライバダウンロード
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
+
+			//IDがDBにあるかを検索
+			//プリペアードステートメント生成
+			sqlStr = "SELECT move_id FROM stock_move WHERE move_id ='" + move_id + "';";
+			psID = con.prepareStatement(sqlStr);
+			//psID.setString(1, move_id);
+			// SQL文実行
+			rsID = psID.executeQuery();
+
+			String str="";
+			while(rsID.next()){
+				str=rsID.getString("move_id");
+			}
+			if (move_id.equals(str)) {
+				//IDがあればNG
+				check="NG";
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("クラス無しエラー");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQLエラー");
+		} finally {
+			try {
+				if (rsID != null) {
+					rsID.close();
+				}
+				if (psID != null) {
+					psID.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			}catch (SQLException e) {
+                e.printStackTrace();
+            }
+		}
+		return check;
+	}
 }

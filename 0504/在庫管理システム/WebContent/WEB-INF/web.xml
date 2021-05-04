@@ -96,5 +96,34 @@
     <url-pattern>/servlet/stock.StockMoveInsert</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>InsertHistory</servlet-name>
+    <servlet-class>stock.InsertHistory</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>InsertHistory</servlet-name>
+    <url-pattern>/servlet/stock.InsertHistory</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StockSearch</servlet-name>
+    <servlet-class>stock.StockSearch</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>StockSearch</servlet-name>
+    <url-pattern>/servlet/stock.StockSearch</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>NewHistory</servlet-name>
+    <servlet-class>stock.NewHistory</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>NewHistory</servlet-name>
+    <url-pattern>/servlet/stock.NewHistory</url-pattern>
+  </servlet-mapping>
 
 </web-app>

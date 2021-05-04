@@ -33,15 +33,31 @@ public class Insert_Items extends HttpServlet {
         List<String> errorList = new ArrayList<String>();
         if (item_id.equals("") || item_id == null) {
             errorList.add("「商品ID」を入力してください");
+        }else if(item_id.length() != 5) {
+        	errorList.add("「商品ID」は5桁で入力してください");
         }
         if (item_name.equals("") || item_name == null) {
             errorList.add("「商品名」を入力してください");
+        }else if(item_name.length() > 255) {
+        	errorList.add("「商品名」が長すぎます");
         }
         if (item_price.equals("") || item_price == null) {
             errorList.add("「販売単価」を入力してください");
+        }else {
+			try {
+				Integer.parseInt(item_price);
+			} catch (NumberFormatException e) {
+				errorList.add("「販売単価」は整数値を入力してください");
+			}
         }
         if (cost_price.equals("") || cost_price == null) {
             errorList.add("「商品原価」を入力してください");
+        }else {
+			try {
+				Integer.parseInt(cost_price);
+			} catch (NumberFormatException e) {
+				errorList.add("「商品原価」は整数値を入力してください");
+			}
         }
      // errorListオブジェクトをrequestにセット
         request.setAttribute("errorList", errorList);

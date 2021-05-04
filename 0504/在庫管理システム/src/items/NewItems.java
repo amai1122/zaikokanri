@@ -21,9 +21,9 @@ public class NewItems extends HttpServlet {
 		//新規なので空欄で登録画面に遷移
 		request.setAttribute("item_id", "");
 		request.setAttribute("item_name","");
-		request.setAttribute("item_price", "");
-		request.setAttribute("cost_price", "");
-		request.setAttribute("stock_qty", "");
+		request.setAttribute("item_price", "0");
+		request.setAttribute("cost_price", "0");
+		request.setAttribute("stock_qty", "0");
 
 		// パスをセット
         String path = NEXTPAGE_PATH;

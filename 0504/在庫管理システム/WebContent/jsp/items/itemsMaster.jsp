@@ -60,7 +60,8 @@
 				<td><%=item.getStock_qty()%></td>
 				<td>
 
-				<form action="../servlet/items.ItemSearch" method="post">
+				<form action="../servlet/stock.NewHistory" method="post">
+					<input type="hidden" value= <%=item.getItem_id()%> name=item_id >
 					<input type="submit" value="入出庫" />
 				</form>
 				</td>

@@ -15,7 +15,7 @@
 	<h1>在庫入出庫履歴</h1>
 	<div class="control">
 
-		<form action="../servlet/items.ItemSearch" method="post">
+		<form action="../servlet/stock.StockSearch" method="post">
 			<label> 商品名検索：<input type="text"name="itemSearch" />
 			<input type="submit" value="検索" />
 			</label>
@@ -48,16 +48,32 @@
 			<tr>
 				<td><%=stockNo%></td>
 				<td>
-					<form action="../servlet/items.UpdateItems" name ="form<%=stockNo%>" method="post">
+					<form action="../servlet/stock.StockMoveInsert" name ="form<%=stockNo%>" method="post">
 						<input type="hidden" value= <%=stock.getMove_id()%> name=Move_id >
 						<a href="javascript:form<%=stockNo%>.submit()" ><%=stock.getMove_id()%></a>
 					</form>
 				</td>
-				<td><%=stock.getReason_id()%></td>
+				<td>
+				<% if("1".equals(stock.getReason_id())){ %>
+					1:仕入
+				<% }else if("2".equals(stock.getReason_id())){ %>
+					2:売上
+				<% }else if("3".equals(stock.getReason_id())){ %>
+					3:棚卸
+				<% }else if("4".equals(stock.getReason_id())){ %>
+					4:そのた
+				<% } %>
+				</td>
 				<td><%=stock.getMove_date()%></td>
 				<td><%=stock.getItem_id()%></td>
 				<td><%=stock.getItem_name()%></td>
-				<td><%=stock.getIn_or_out()%></td>
+				<td>
+				<% if("+".equals(stock.getIn_or_out())){ %>
+					＋:入庫
+				<% }else{ %>
+					－:出庫
+				<% } %>
+				</td>
 				<td><%=stock.getMove_qty()%></td>
 				<td><%=stock.getStock_qty()%></td>
 			</tr>
