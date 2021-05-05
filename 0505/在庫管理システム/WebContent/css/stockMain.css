@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+div.search{
+	float:left;
+	margin-left:54px;
+	margin-right:54px;
+}
+
+td.Move_qty{
+	text-align: right;
+}
+td.Stock_qty{
+	text-align: right;
+}
