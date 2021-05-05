@@ -21,11 +21,9 @@ public class ItemInitialize extends HttpServlet {
 
 		ItemsDBAccess itemSet = new ItemsDBAccess();
 		List<ItemsBean> itemList = itemSet.itemsDBAccessSelect("00000","all");
-		System.out.println("allセレクト");
 
 		//リストからリクエストにセット
 		request.setAttribute("itemList", itemList);
-		System.out.println("allセレクトをリクエストにセット");
 
 		// パスをセット
 		String path = NEXTPAGE_PATH;

@@ -25,7 +25,6 @@ public class ItemSearch extends HttpServlet {
 
 		//リストからリクエストにセット
 		request.setAttribute("itemList", itemList);
-		System.out.println("検索結果をリクエストにセット");
 
 		// パスをセット
 		String path = NEXTPAGE_PATH;

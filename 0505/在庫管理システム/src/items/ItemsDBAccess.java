@@ -27,37 +27,31 @@ public class ItemsDBAccess {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
 
-			//System.out.println("DB接続されましたSelect");
-
 			//SQL文字列(all= update= )
 			if ("all".equals(dbCom)) {
 				//商品マスタの表示なら全部持ってくる
 				sqlStr = "SELECT * FROM items;";
-				//System.out.println("allが選択されました");
 			} else if ("update".equals(dbCom)) {
 				//編集画面なら指定IDのデータだけ持ってくる
-				sqlStr = "SELECT * From items WHERE item_id ='"+ item_id +"';";
-				//System.out.println("updateが選択されました");
+				sqlStr = "SELECT * From items WHERE item_id =?";
 			} else if ("search".equals(dbCom)) {
 				//商品名で検索(item_idに商品名が入る)
-				sqlStr = "SELECT * From items WHERE item_name LIKE '%"+ item_id +"%';";
-				//System.out.println("searchが選択されました");
+				sqlStr = "SELECT * From items WHERE item_name LIKE ?";
 			}
 			// プリペアドステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
 
-			//int index = 1;
-			//if ("all".equals(dbCom)) {
+			int index = 1;
+			if ("all".equals(dbCom)) {
 				//バインド変数なし
-			//} else if ("update".equals(dbCom)) {
-			//	pstmt.setString(index, item_id);
-			//} else if ("search".equals(dbCom)) {
-			//	pstmt.setString(index, "%" + item_id + "%");
-			//}
+			} else if ("update".equals(dbCom)) {
+				pstmt.setString(index, item_id);
+			} else if ("search".equals(dbCom)) {
+				pstmt.setString(index, "%" + item_id + "%");
+			}
 
 			// SQL文実行
 			rs = pstmt.executeQuery();
-			//System.out.println("セレクトが実行されました");
 
 			//戻り値のlistにセット
 			while (rs.next()) {
@@ -70,8 +64,6 @@ public class ItemsDBAccess {
 
 				itemList.add(bn);
 			}
-			//System.out.println("リストにセットされました");
-
 
 		}catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -114,16 +106,14 @@ public class ItemsDBAccess {
 			Class.forName("org.mariadb.jdbc.Driver");
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
-			//System.out.println("DB接続されましたInsert");
 
 			//IDがDBにあるかを検索
 			//プリペアードステートメント生成
-			sqlStr = "SELECT item_id FROM items WHERE item_id ='" + item_id + "';";
+			sqlStr = "SELECT item_id FROM items WHERE item_id =?";
 			psID = con.prepareStatement(sqlStr);
-			//psID.setString(1, item_id);
+			psID.setString(1, item_id);
 			// SQL文実行
 			rsID = psID.executeQuery();
-			//System.out.println("セレクトしました");
 
 			String str="";
 			while(rsID.next()){
@@ -131,43 +121,36 @@ public class ItemsDBAccess {
 			}
 			if (item_id.equals(str)) {
 				//IDがあれば更新
-				sqlStr = "UPDATE items SET item_id='" + item_id + "',item_name='" + item_name + "',item_price ="
-						+ item_price + " ,cost_price= " + cost_price + " WHERE item_id = '" + item_id + "';";
-				//System.out.println("更新が選ばれました");
+				sqlStr = "UPDATE items SET item_id= ?,item_name= ?,item_price =? ,cost_price= ? WHERE item_id = ?";
 			} else {
 				//IDが無ければ新規登録
-				sqlStr = "INSERT INTO items(item_id,item_name,item_price,cost_price)VALUES('" + item_id + "','"
-						+ item_name + "'," + item_price + "," + cost_price + ");";
-				//System.out.println("新規登録が選ばれました");
+				sqlStr = "INSERT INTO items(item_id,item_name,item_price,cost_price)VALUES(?, ?, ?, ?)";
 			}
 
 			//プリペアードステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
 
-			//int index = 1;
-			//if (item_id.equals(rsID.getString("item_id"))) {
-			//	pstmt.setString(index++, item_id);
-			//	pstmt.setString(index++, item_name);
-			//	pstmt.setString(index++, item_price);
-			//	pstmt.setString(index++, cost_price);
-			//	pstmt.setString(index++, item_id);
-			//} else {
-			//	pstmt.setString(index++, item_id);
-			//	pstmt.setString(index++, item_name);
-			//	pstmt.setString(index++, item_price);
-			//	pstmt.setString(index++, cost_price);
-			//}
-
+			//バインド変数パラメータ
+			int index = 1;
+			if (item_id.equals(str)) {
+				pstmt.setString(index++, item_id);
+				pstmt.setString(index++, item_name);
+				pstmt.setInt(index++, Integer.parseInt(item_price));
+				pstmt.setInt(index++, Integer.parseInt(cost_price));
+				pstmt.setString(index++, item_id);
+			} else {
+				pstmt.setString(index++, item_id);
+				pstmt.setString(index++, item_name);
+				pstmt.setInt(index++, Integer.parseInt(item_price));
+				pstmt.setInt(index++, Integer.parseInt(cost_price));
+			}
 			//SQL実行
 			pstmt.executeUpdate();
-			//System.out.println("保存されました");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			//System.out.println("クラス無しエラー");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//System.out.println("SQLエラー");
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -205,27 +188,23 @@ public class ItemsDBAccess {
 			Class.forName("org.mariadb.jdbc.Driver");
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
-			System.out.println("DB接続されましたDelete");
 
 			//削除
-			sqlStr = "DELETE FROM items WHERE item_id ='"+ item_id + "';";
+			sqlStr = "DELETE FROM items WHERE item_id =?";
 
 			//プリペアードステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
 
-			//int index = 1;
-			//pstmt.setString(index, item_id);
+			int index = 1;
+			pstmt.setString(index, item_id);
 
 			//SQL実行
 			pstmt.executeUpdate();
-			//System.out.println("削除されました");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			//System.out.println("クラス無しエラー");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//System.out.println("SQLエラー");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -259,10 +238,15 @@ public class ItemsDBAccess {
 			con = DriverManager.getConnection("jdbc:mariadb://localhost/techfun", "root", "");
 
 			//在庫数更新
-			sqlStr = "UPDATE items SET stock_qty=" + stock_qty + " WHERE item_id = '" + item_id + "';";
+			sqlStr = "UPDATE items SET stock_qty=? WHERE item_id = ?";
 
 			//プリペアードステートメント生成
 			pstmt = con.prepareStatement(sqlStr);
+
+			int index = 1;
+			pstmt.setInt(index++, stock_qty);
+			pstmt.setString(index++, item_id);
+
 			//SQL実行
 			pstmt.executeUpdate();
 

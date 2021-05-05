@@ -22,11 +22,9 @@ public class StockInitialize extends HttpServlet {
 
 		StockDBAccess stockSet = new StockDBAccess();
 		List<StockBean> stockList = stockSet.stockDBAccessSelect("0000000","all");
-		//System.out.println("allセレクト");
 
 		//リストからリクエストにセット
 		request.setAttribute("stockList", stockList);
-		//System.out.println("allセレクトをリクエストにセット");
 
 		// パスをセット
 		String path = NEXTPAGE_PATH;
