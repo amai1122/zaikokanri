@@ -1,0 +1,1 @@
+CREATE TABLE items (item_id VARCHAR(5) PRIMARY KEY,item_name VARCHAR(255),item_price INTEGER DEFAULT 0,cost_price INTEGER DEFAULT 0,stock_qty INTEGER DEFAULT 0);
