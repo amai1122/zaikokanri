@@ -1,0 +1,24 @@
+@charset "UTF-8";
+h1.master{
+	color:#000000 ;
+}
+div.newitem {
+	float:left;
+}
+div.search{
+	float:left;
+	margin-left:54px;
+	margin-right:54px;
+}
+div.return{
+	margin-left:64px;
+}
+td.price{
+	text-align: right;
+}
+td.c_price{
+	text-align: right;
+}
+td.stock{
+	text-align: right;
+}
