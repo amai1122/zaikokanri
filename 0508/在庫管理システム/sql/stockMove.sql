@@ -1,0 +1,1 @@
+CREATE TABLE stock_move (move_id VARCHAR(7) PRIMARY KEY,reason_id VARCHAR(1),move_date DATE ,item_id VARCHAR(5),item_name VARCHAR(255),item_price INTEGER DEFAULT 0,cost_price INTEGER DEFAULT 0,stock_qty INTEGER DEFAULT 0,in_or_out VARCHAR(1),move_qty INTEGER DEFAULT 0);
