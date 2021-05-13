@@ -1,0 +1,10 @@
+@charset "UTF-8";
+div.error {
+    color : #ff0000 ;
+}
+input.itemName{
+	width :400px;
+}
+input.insert{
+	float:left;
+}
