@@ -43,7 +43,7 @@
 			<tr>
 				<td>商品名</td>
 				<td>
-					<input type="text" name="item_name" class="itemName" value= <c:out value="${item_name}" /> />
+					<input type="text" name="item_name" class="itemName" value= <c:out value="${item_name}" /> >
 					</td>
 			</tr>
 			<tr>
